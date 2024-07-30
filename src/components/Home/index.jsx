@@ -44,8 +44,8 @@ const Home = () => {
     // }
   };
   return (
-    <div className="w-full max-w-screen-lg mx-auto py-10">
-      <h1 className="text-center font-bold text-2xl text-indigo-900 mb-6">
+    <div className="w-full max-w-screen-lg mx-auto py-10 px-4 sm:px-6 lg:px-8">
+      <h1 className="text-center font-bold text-2xl text-blue-600 mb-6">
         Welcome to Smart Document Analyzer
       </h1>
       <p className="text-lg text-center text-gray-800 font-semibold mb-6">

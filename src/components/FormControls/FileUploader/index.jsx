@@ -49,7 +49,7 @@ const FileUploader = ({
   return (
     <div className={className}>
       <div
-        className="w-full flex items-center justify-center border-[2px] border-dotted border-indigo-600 rounded-lg py-8 px-4 bg-white bg-opacity-10 cursor-pointer"
+        className="w-full flex items-center justify-center border-[2px] border-dotted border-blue-600 rounded-lg py-8 px-4 bg-white bg-opacity-10 cursor-pointer"
         onClick={handleClick}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
@@ -70,7 +70,7 @@ const FileUploader = ({
           </div>
           <p className="text-lg text-gray-800 ">
             <span className="font-medium">Drop your documents here, or</span>{" "}
-            <span className="text-indigo-800 font-semibold">browse</span>
+            <span className="text-blue-600 font-semibold">browse</span>
           </p>
         </label>
       </div>
