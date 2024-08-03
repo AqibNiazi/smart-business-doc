@@ -30,7 +30,7 @@ const TextBox = ({
         value={value}
         onChange={onChange}
         disabled={disabled}
-        className="border border-gray-300 bg-gray-50 outline-none text-gray-900 text-sm rounded-md block w-full p-2.5 focus:outline-none  hover:bg-white hover:border-blue-500 focus:border-blue-50"
+        className="border border-gray-300 bg-gray-50 outline-none text-gray-900 text-sm rounded-md block w-full p-2.5 focus:outline-none  hover:bg-white hover:border-blue-500 focus:border-blue-500"
       />
     </div>
   );

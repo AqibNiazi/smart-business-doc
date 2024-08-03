@@ -8,9 +8,8 @@ const FileUploader = ({
   fileTypes = [],
   text,
   className,
-  files,
-  setFiles,
-  handleDelete,
+  file,
+  setFile,
 }) => {
   const fileInputRef = useRef(null);
 
@@ -19,12 +18,10 @@ const FileUploader = ({
       fileTypes.includes(file.type)
     );
 
-    const newFiles = filteredFiles.map((file) => ({
-      file,
-      preview: URL.createObjectURL(file),
-    }));
-
-    setFiles([...files, ...newFiles]);
+    if (filteredFiles.length > 0) {
+      const newFile = filteredFiles[0];
+      setFile({ file: newFile, preview: URL.createObjectURL(newFile) });
+    }
   };
 
   const handleDragOver = (e) => {
@@ -68,41 +65,34 @@ const FileUploader = ({
           <div className="flex justify-center mb-4">
             <FileIcon className="w-8 h-8" />
           </div>
-          <p className="text-lg text-gray-800 ">
-            <span className="font-medium">Drop your documents here, or</span>{" "}
+          <p className="text-lg text-gray-800">
+            <span className="font-medium">Drop your document here, or</span>{" "}
             <span className="text-blue-600 font-semibold">browse</span>
           </p>
         </label>
       </div>
-      {files?.length > 0 && (
+      {file && (
         <div className="mt-4">
-          <ul>
-            {files?.map((file, index) => (
-              <li
-                key={index}
-                className="flex items-center justify-between border border-indigo-300 p-2 rounded mb-2 bg-white bg-opacity-40"
-              >
-                <div className="mr-2">
-                  {file.file.type.startsWith("image/") ? (
-                    <ImageIcon />
-                  ) : (
-                    <FileIcon />
-                  )}
-                </div>
-                <p className="text-sm text-gray-800 font-medium">
-                  {file.file.name}
-                </p>
+          <div className="flex items-center justify-between border border-indigo-300 p-2 rounded mb-2 bg-white bg-opacity-40">
+            <div className="mr-2">
+              {file.file.type.startsWith("image/") ? (
+                <ImageIcon />
+              ) : (
+                <FileIcon />
+              )}
+            </div>
+            <p className="text-sm text-gray-800 font-medium">
+              {file.file.name}
+            </p>
 
-                <button
-                  type="button"
-                  onClick={() => handleDelete(index)}
-                  className="text-red-400 hover:text-red-600"
-                >
-                  <FaTrashAlt />
-                </button>
-              </li>
-            ))}
-          </ul>
+            <button
+              type="button"
+              onClick={() => setFile(null)}
+              className="text-red-400 hover:text-red-600"
+            >
+              <FaTrashAlt />
+            </button>
+          </div>
         </div>
       )}
     </div>
