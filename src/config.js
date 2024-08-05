@@ -7,5 +7,6 @@ const clientBaseURL = axios.create({
 
 const clientEndPoints = {
   uploadDoc: "/document/upload",
+  queryDoc: "/document/query",
 };
 export { clientBaseURL, clientEndPoints };
