@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { FileUploader, Form } from "@components/FormControls";
 import { Button } from "../UI";
-import { TextBox } from "../FormControls";
 import { clientBaseURL, clientEndPoints } from "../../config";
 import toast from "react-hot-toast";
 import SummaryForm from "../SummaryForm";
-import EntityExtrationForm from "../EntityExtrationForm";
 import QuestionsForm from "../QuestionsForm";
+import EntityExtractionForm from "../EntityExtrationForm";
 
 const Home = () => {
   const [document, setDocument] = useState(null);
@@ -96,7 +95,7 @@ const Home = () => {
       )}
       <div className="flex flex-col sm:flex-row justify-between sm:mb-4">
         <SummaryForm />
-        <EntityExtrationForm />
+        <EntityExtractionForm />
         <QuestionsForm />
       </div>
     </div>
