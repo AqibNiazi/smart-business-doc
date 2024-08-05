@@ -126,7 +126,7 @@ const Home = () => {
       {currentResponseType === "summary" && queryResponses.summary && (
         <div
           id="response_box"
-          className="bg-white rounded-md border-2 border-blue-600 shadow-md p-4 mt-6 w-full"
+          className="bg-white rounded-md border-2 border-dashed border-blue-600 shadow-md p-4 mt-6 w-full"
         >
           <p className="text-center text-xl font-bold mb-2 text-blue-600">
             AI Response for Summary
@@ -141,7 +141,7 @@ const Home = () => {
         queryResponses.entity_extraction && (
           <div
             id="response_box"
-            className="bg-white rounded-md border-2 border-blue-600 shadow-md p-4 mt-6 w-full"
+            className="bg-white rounded-md border-2 border-dashed border-blue-600 shadow-md p-4 mt-6 w-full"
           >
             <p className="text-center text-xl font-bold mb-2 text-blue-600">
               AI Response for Entity Extraction
@@ -156,7 +156,7 @@ const Home = () => {
         queryResponses.question_answer && (
           <div
             id="response_box"
-            className="bg-white rounded-md border-2 border-blue-600 shadow-md p-4 mt-6 w-full"
+            className="bg-white rounded-md border-2 border-dashed border-blue-600 shadow-md p-4 mt-6 w-full"
           >
             <p className="text-center text-xl font-bold mb-2 text-blue-600">
               AI Response for Question
