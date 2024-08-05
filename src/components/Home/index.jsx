@@ -1,16 +1,35 @@
 import React, { useState } from "react";
-import { FileUploader, Form } from "@components/FormControls";
+import { FileUploader, Form } from "../FormControls";
 import { Button } from "../UI";
 import { clientBaseURL, clientEndPoints } from "../../config";
 import toast from "react-hot-toast";
 import SummaryForm from "../SummaryForm";
 import QuestionsForm from "../QuestionsForm";
 import EntityExtractionForm from "../EntityExtrationForm";
+import { useQueryContext } from "../../store/QueryContext";
+import useTypingEffect from "../../hook";
 
 const Home = () => {
   const [document, setDocument] = useState(null);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [currentResponseType, setCurrentResponseType] = useState(null); // Manage the current response type
+  const { queryResponses } = useQueryContext();
+
+  const displayedQueryResponse = useTypingEffect(
+    JSON.stringify(queryResponses.question_answer, null, 2),
+    10
+  );
+
+  const displayedEntityResponse = useTypingEffect(
+    JSON.stringify(queryResponses.entity_extraction, null, 2),
+    10
+  );
+
+  const displayedSummaryResponse = useTypingEffect(
+    JSON.stringify(queryResponses.summary, null, 2),
+    10
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,11 +112,60 @@ const Home = () => {
           </ul>
         </div>
       )}
-      <div className="flex flex-col sm:flex-row justify-between sm:mb-4">
-        <SummaryForm />
-        <EntityExtractionForm />
-        <QuestionsForm />
+      <div className="flex flex-col sm:flex-row justify-between sm:mb-8">
+        <SummaryForm onSelect={() => setCurrentResponseType("summary")} />
+        <EntityExtractionForm
+          onSelect={() => setCurrentResponseType("entity_extraction")}
+        />
+        <QuestionsForm
+          onSelect={() => setCurrentResponseType("question_answer")}
+        />
       </div>
+
+      {/* Display the response based on currentResponseType */}
+      {currentResponseType === "summary" && queryResponses.summary && (
+        <div
+          id="response_box"
+          className="bg-white rounded-md border-2 border-blue-600 shadow-md p-4 mt-6 w-full"
+        >
+          <p className="text-center text-xl font-bold mb-2 text-blue-600">
+            AI Response for Summary
+          </p>
+          <pre className="overflow-auto whitespace-pre-wrap text-lg text-gray-800 leading-6">
+            {displayedSummaryResponse}
+          </pre>
+        </div>
+      )}
+
+      {currentResponseType === "entity_extraction" &&
+        queryResponses.entity_extraction && (
+          <div
+            id="response_box"
+            className="bg-white rounded-md border-2 border-blue-600 shadow-md p-4 mt-6 w-full"
+          >
+            <p className="text-center text-xl font-bold mb-2 text-blue-600">
+              AI Response for Entity Extraction
+            </p>
+            <pre className="overflow-auto whitespace-pre-wrap text-lg text-gray-800 leading-6">
+              {displayedEntityResponse}
+            </pre>
+          </div>
+        )}
+
+      {currentResponseType === "question_answer" &&
+        queryResponses.question_answer && (
+          <div
+            id="response_box"
+            className="bg-white rounded-md border-2 border-blue-600 shadow-md p-4 mt-6 w-full"
+          >
+            <p className="text-center text-xl font-bold mb-2 text-blue-600">
+              AI Response for Question
+            </p>
+            <pre className="overflow-auto whitespace-pre-wrap text-lg text-gray-800 leading-6">
+              {displayedQueryResponse}
+            </pre>
+          </div>
+        )}
     </div>
   );
 };
