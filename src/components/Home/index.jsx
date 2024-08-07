@@ -24,6 +24,8 @@ const Home = () => {
     }
 
     try {
+      setResponse(null);
+      setCurrentResponseType(null);
       const response = await clientBaseURL.post(
         `${clientEndPoints?.uploadDoc}`,
         formData,
